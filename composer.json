@@ -4,14 +4,22 @@
   "authors": [
     {
       "name": "Dirk Persky",
-      "email": "dirk.persky@gmail.com"
+      "email": "dirk.persky@gmail.com",
+      "homepage": "dp-dvelop.de"
     }
   ],
   "autoload": {
-    "psr-0": {"DirkPersky\\Typo3Composer": "src/"}
+    "psr-4": {"DirkPersky\\Typo3Composer": "src/"}
   },
   "require": {
     "php": "^7.1.0",
     "composer/composer": "dev-master"
+  },
+  "scripts": {
+    "post-update-cmd": [
+    ],
+    "post-install-cmd": [
+      "DirkPersky\\Typo3Composer\\Classess\\Install::initProject"
+    ]
   }
 }
