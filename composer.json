@@ -13,15 +13,15 @@
     "psr-4": {"DirkPersky\\Typo3Composer\\": "src/"}
   },
   "require": {
-    "php": "^7.1.0",
-    "composer/composer": "dev-master"
+    "php": "^7.0.0",
+    "composer/composer": "@stable"
   },
   "scripts": {
     "post-update-cmd": [
-      "DirkPersky\\Typo3Composer\\Classes\\Composer::setVersion"
+      "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
     ],
     "post-install-cmd": [
-      "DirkPersky\\Typo3Composer\\Classes\\Composer::setVersion"
+      "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
     ]
   }
 }
