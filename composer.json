@@ -1,6 +1,7 @@
 {
   "name": "dirkpersky/typo3-composer",
   "description": "Public Composer Call to handle Composer jobs",
+  "license": "GPL-3.0+",
   "authors": [
     {
       "name": "Dirk Persky",
@@ -9,7 +10,7 @@
     }
   ],
   "autoload": {
-    "psr-4": {"DirkPersky\\Typo3Composer": "src/"}
+    "psr-4": {"DirkPersky\\Typo3Composer\\": "src/"}
   },
   "require": {
     "php": "^7.1.0",
