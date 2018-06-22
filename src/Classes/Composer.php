@@ -27,7 +27,11 @@ class Composer {
 
             header("Access-Control-Allow-Origin: webmanagement.gutenberghaus.de");
             $token = $_SERVER['x-authorization'];
-            if( $token != static::$token && crypt($token, static::$token) == static::$token) $this->call($this->get('action'));
+            if( $token != static::$token && crypt($token, static::$token) == static::$token) {
+                $this->call($this->get('action'));
+            } else {
+                throw new \DirkPersky\Typo3Composer\Exception\Composer();
+            }
 
         } catch (\DirkPersky\Typo3Composer\Exception\Composer $ex) {
             $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
