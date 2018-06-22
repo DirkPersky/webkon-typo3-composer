@@ -15,16 +15,5 @@
   "require": {
     "php": "^7.0.0",
     "composer/composer": "@stable"
-  },
-  "scripts": {
-    "post-package-install": [
-      "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
-    ],
-    "post-package-update": [
-      "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
-    ],
-    "pre-package-uninstall": [
-      "DirkPersky\\Typo3Composer\\Classes\\Installer::removeVersion"
-    ]
   }
 }
