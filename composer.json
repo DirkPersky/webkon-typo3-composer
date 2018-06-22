@@ -18,9 +18,10 @@
   },
   "scripts": {
     "post-update-cmd": [
+      "DirkPersky\\Typo3Composer\\Classes\\Composer::setVersion"
     ],
     "post-install-cmd": [
-      "DirkPersky\\Typo3Composer\\Classess\\Composer::setVersion"
+      "DirkPersky\\Typo3Composer\\Classes\\Composer::setVersion"
     ]
   }
 }
