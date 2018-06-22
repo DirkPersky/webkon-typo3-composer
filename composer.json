@@ -1,0 +1,17 @@
+{
+  "name": "dirkpersky/typo3-composer",
+  "description": "Public Composer Call to handle Composer jobs",
+  "authors": [
+    {
+      "name": "Dirk Persky",
+      "email": "dirk.persky@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-0": {"DirkPersky\\Typo3Composer": "src/"}
+  },
+  "require": {
+    "php": "^7.1.0",
+    "composer/composer": "dev-master"
+  }
+}
