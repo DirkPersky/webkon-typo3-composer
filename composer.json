@@ -17,11 +17,14 @@
     "composer/composer": "@stable"
   },
   "scripts": {
-    "post-update-cmd": [
+    "post-package-install": [
       "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
     ],
-    "post-install-cmd": [
+    "post-package-update": [
       "DirkPersky\\Typo3Composer\\Classes\\Installer::setVersion"
+    ],
+    "pre-package-uninstall": [
+      "DirkPersky\\Typo3Composer\\Classes\\Installer::removeVersion"
     ]
   }
 }
