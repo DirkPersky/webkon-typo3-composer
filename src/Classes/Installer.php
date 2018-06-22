@@ -18,9 +18,9 @@ class Installer {
         ob_start();
         require_once dirname(__DIR__).'/view/composer.php';
         $content = ob_get_contents();
+        ob_clean();
         // Copy File to Public dir
         file_put_contents( sprintf('%2$s%1$s%3$scomposer.php',DIRECTORY_SEPARATOR  ,$basePath, $dir), $content);
-//        copy(dirname(__DIR__).DIRECTORY_SEPARATOR.'composer.php', sprintf('%2$s%1$s%3$scomposer.php',DIRECTORY_SEPARATOR  ,$basePath, $dir));
     }
     protected static function getPathInfo(ScriptEvent $event){
         if( Composer::$composer ) {
