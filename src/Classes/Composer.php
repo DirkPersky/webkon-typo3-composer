@@ -8,13 +8,13 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 use TYPO3\CMS\Composer\Plugin\Core\InstallerScripts\WebDirectory;
 
-class Install {
+class Composer {
     public function __construct() {
         var_dump('COMPOSER_HOME=' . dirname(__DIR__) . '/vendor/bin/composer');
     }
 
 
-    public static function initProject(ScriptEvent $event){
+    public static function setVersion(ScriptEvent $event){
         var_dump(new WebDirectory());
         var_dump($event);
     }

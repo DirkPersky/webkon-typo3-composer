@@ -19,7 +19,7 @@
     "post-update-cmd": [
     ],
     "post-install-cmd": [
-      "DirkPersky\\Typo3Composer\\Classess\\Install::initProject"
+      "DirkPersky\\Typo3Composer\\Classess\\Composer::setVersion"
     ]
   }
 }
