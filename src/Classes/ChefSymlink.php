@@ -30,10 +30,12 @@ class ChefSymlink
         $glob = glob(sprintf('%1$s*',$dir));
         foreach ($glob as $key => $ext){
             $name = str_replace($dir,'', $ext);
-            if( is_dir($ext) && !is_link($ext) && !in_array($name, static::$ignore['sys'])) {
+            if( is_dir($ext) && !in_array($name, static::$ignore['sys'])) {
                 $chefDirExt = sprintf('%2$s%1$stypo3%1$ssysext%1$s%3$s', DIRECTORY_SEPARATOR, $chefDir, $name);
-                static::rmDir($ext);
-                symlink($chefDirExt, $ext);
+                if(is_dir($chefDirExt) && !is_link($ext)) {
+                    static::rmDir($ext);
+                    symlink($chefDirExt, $ext);
+                }
             }
         }
     }
@@ -47,10 +49,12 @@ class ChefSymlink
                 $globVendor = glob(sprintf('%2$s%1$s*',DIRECTORY_SEPARATOR, $vendor));
                 foreach ($globVendor as $key2 => $package) {
                     $namePackage = trim(str_replace($vendor,'', $package), DIRECTORY_SEPARATOR);
-                    if(is_dir($package)  && !is_link($package)  && !in_array($name.'/'.$namePackage, static::$ignore['vendor'])){
+                    if(is_dir($package)  && !in_array($name.'/'.$namePackage, static::$ignore['vendor'])){
                         $chefDirExt = sprintf('%2$s%1$svendor%1$s%3$s%1$s%4$s', DIRECTORY_SEPARATOR, $chefDir, $name,$namePackage);
-                        static::rmDir($package);
-                        symlink($chefDirExt, $package);
+                        if(is_dir($chefDirExt) && !is_link($package)){
+                            static::rmDir($package);
+                            symlink($chefDirExt, $package);
+                        }
                     }
                 }
             }
