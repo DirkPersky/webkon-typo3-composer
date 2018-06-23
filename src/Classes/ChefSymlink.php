@@ -12,13 +12,13 @@ class ChefSymlink
     protected static $ignore = [
         'sys' => [],
         'vendor' => [
-
+            'typo3/cms-composer-installers',
+            'dirkpersky/typo3-composer'
         ]
     ];
 
     public static function setSymlink(ScriptEvent $event){
         list($basePath, $dir) = static::getPathInfo($event);
-
         $chefDir = isset(static::$config['chef']) ? static::$config['chef']: null;
         if($chefDir) {
             static::sysExt($chefDir, $basePath, $dir);
@@ -28,14 +28,12 @@ class ChefSymlink
     protected static function sysExt($chefDir, $basePath, $publicDir){
         $dir = sprintf('%2$s%1$s%3$stypo3%1$ssysext%1$s',DIRECTORY_SEPARATOR  ,$basePath, $publicDir);
         $glob = glob(sprintf('%1$s*',$dir));
-        $ext = [];
-
         foreach ($glob as $key => $ext){
             $name = str_replace($dir,'', $ext);
-            if( is_dir($chefDirExt) && !in_array($name, static::$ignore['sys'])) {
-                $chefDirExt = sprintf('%2$s%1$spublic%1$stypo3%1$ssysext%1$s%3$s', DIRECTORY_SEPARATOR, $chefDir, $name);
-//                static::rmDir($ext);
-//                symlink($chefDirExt, $ext);
+            if( is_dir($ext) && !is_link($ext) && !in_array($name, static::$ignore['sys'])) {
+                $chefDirExt = sprintf('%2$s%1$stypo3%1$ssysext%1$s%3$s', DIRECTORY_SEPARATOR, $chefDir, $name);
+                static::rmDir($ext);
+                symlink($chefDirExt, $ext);
             }
         }
     }
@@ -49,11 +47,10 @@ class ChefSymlink
                 $globVendor = glob(sprintf('%2$s%1$s*',DIRECTORY_SEPARATOR, $vendor));
                 foreach ($globVendor as $key2 => $package) {
                     $namePackage = trim(str_replace($vendor,'', $package), DIRECTORY_SEPARATOR);
-                    if(is_dir($package) && !in_array($name.'/'.$namePackage, static::$ignore['vendor'])){
-                        $chefDirExt = sprintf('%2$s%1$svendor%1$s%4$s%1$s%3$s', DIRECTORY_SEPARATOR, $chefDir, $name,$namePackage);
-
-//                        static::rmDir($package);
-//                        symlink($chefDirExt, $package);
+                    if(is_dir($package)  && !is_link($package)  && !in_array($name.'/'.$namePackage, static::$ignore['vendor'])){
+                        $chefDirExt = sprintf('%2$s%1$svendor%1$s%3$s%1$s%4$s', DIRECTORY_SEPARATOR, $chefDir, $name,$namePackage);
+                        static::rmDir($package);
+                        symlink($chefDirExt, $package);
                     }
                 }
             }

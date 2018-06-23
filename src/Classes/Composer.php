@@ -36,7 +36,7 @@ class Composer {
         } catch (\DirkPersky\Typo3Composer\Exception\Composer $ex) {
             $protocol = (isset($_SERVER['SERVER_PROTOCOL']) ? $_SERVER['SERVER_PROTOCOL'] : 'HTTP/1.0');
             header($protocol . ' ' . 404 . ' Page Not Found');
-            require_once dirname(__DIR__).'/view/404.php';
+            require_once dirname(__DIR__).'/View/404.php';
             exit;
         }
     }

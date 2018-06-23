@@ -16,7 +16,7 @@ class Installer {
         list($basePath, $dir) = static::getPathInfo($event);
 
         ob_start();
-        require_once dirname(__DIR__).'/view/composer.php';
+        require_once dirname(__DIR__).'/View/composer.php';
         $content = ob_get_contents();
         ob_clean();
         // Copy File to Public dir
