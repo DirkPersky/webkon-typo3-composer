@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 
 class Composer {
     static $composer;
-    static $token = '$1$Tq78lmeW$1UBxHRze56fuvFf5rr4lJ.';
+    static $token;
 
     public function __construct($loader) {
         $selfPath = $loader->findFile('DirkPersky\\Typo3Composer\\Classes\\Composer');
@@ -20,11 +20,23 @@ class Composer {
             'COMPOSER' => $base,
             'OSTYPE' => 'OS400',
         ];
+        static::getToken();
+    }
+    protected function getToken(){
+        // create curl resource
+        $ch = curl_init();
+        // set url
+        curl_setopt($ch, CURLOPT_URL, "https://webmanagement.gutenberghaus.de/token/auth/".urlencode($_SERVER['SERVER_NAME']));
+        //return the transfer as a string
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        // $output contains the output string
+        static::$token = curl_exec($ch);
+        // close curl resource to free up system resources
+        curl_close($ch);
     }
     public function run(){
         try {
             if( empty($_SERVER['x-authorization']) ) throw new \DirkPersky\Typo3Composer\Exception\Composer();
-
             header("Access-Control-Allow-Origin: webmanagement.gutenberghaus.de");
             $token = $_SERVER['x-authorization'];
             if( $token != static::$token && crypt($token, static::$token) == static::$token) {
