@@ -12,7 +12,6 @@ class ChefSymlink
     protected static $ignore = [
         'sys' => [],
         'vendor' => [
-            'typo3/cms-composer-installers',
             'dirkpersky/typo3-composer'
         ]
     ];
