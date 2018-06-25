@@ -36,7 +36,7 @@ class Composer {
             if( empty($_SERVER['HTTP_X_AUTHORIZATION']) ) throw new \DirkPersky\Typo3Composer\Exception\Composer();
             header("Access-Control-Allow-Origin: *");
             if( static::getToken($_SERVER['HTTP_X_AUTHORIZATION'])) {
-                $this->call($this->get('action'));
+                $this->call($this->get('action', true));
             } else {
                 throw new \DirkPersky\Typo3Composer\Exception\Composer();
             }
@@ -48,8 +48,11 @@ class Composer {
             exit;
         }
     }
-    protected function get($name){
-        if(empty($_POST[$name])) throw new \DirkPersky\Typo3Composer\Exception\Composer();
+    protected function get($name, $throw = false){
+        if(empty($_POST[$name])) {
+            if($throw) throw new \DirkPersky\Typo3Composer\Exception\Composer();
+            return '';
+        }
         return $_POST[$name];
     }
     protected function call($command){
@@ -58,7 +61,7 @@ class Composer {
         putenv("COMPOSER={$config['COMPOSER']}composer.json" );
         putenv("OSTYPE={$config['OSTYPE']}"); //force to use php://output instead of php://stdout
 
-        exec(sprintf('cd %1$s && composer %2$s', $config['COMPOSER'], $command), $out,$return);
+        exec(trim(sprintf('cd %1$s && composer %2$s %3$s', $config['COMPOSER'], $command, $this->get('options'))), $out,$return);
         die(json_encode($out));
     }
 }
