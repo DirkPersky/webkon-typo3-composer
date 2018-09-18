@@ -34,8 +34,11 @@ class ChefSymlink
                 $chefDirExt = sprintf('%2$s%1$stypo3%1$ssysext%1$s%3$s', DIRECTORY_SEPARATOR, $chefDir, $name);
                 if(is_dir($chefDirExt) && !is_link($ext)) {
                     static::rmDir($ext);
-                    symlink($chefDirExt, $ext);
                 }
+                if(is_link($ext)) {
+                    @unlink($ext);
+                }
+                @symlink($chefDirExt, $ext);
             }
         }
     }
@@ -53,8 +56,11 @@ class ChefSymlink
                         $chefDirExt = sprintf('%2$s%1$svendor%1$s%3$s%1$s%4$s', DIRECTORY_SEPARATOR, $chefDir, $name,$namePackage);
                         if(is_dir($chefDirExt) && !is_link($package)){
                             static::rmDir($package);
-                            symlink($chefDirExt, $package);
                         }
+                        if(is_link($package)) {
+                            @unlink($package);
+                        }
+                        @symlink($chefDirExt, $package);
                     }
                 }
             }
