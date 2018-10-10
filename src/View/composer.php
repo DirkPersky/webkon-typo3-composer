@@ -7,6 +7,6 @@ if (version_compare(PHP_VERSION, '7.0.0', '<')) {
 
 // Set up the application for the Frontend
 call_user_func(function () {
-    $classLoader = require '<?= $basePath ?>/vendor/autoload.php';
+    $classLoader = require '../vendor/autoload.php';
     (new \DirkPersky\Typo3Composer\Classes\Composer($classLoader))->run();
 });
