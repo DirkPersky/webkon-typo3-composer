@@ -19,7 +19,7 @@ class ChefSymlink
 
     public static function setSymlink(ScriptEvent $event){
         list($basePath, $dir) = static::getPathInfo($event);
-        $chefDir = isset(static::$config['chef']) ? static::$config['chef']: null;
+        $chefDir = isset(static::$config['extra']['chef']) ? static::$config['extra']['chef']: null;
         if($chefDir) {
             static::sysExt($chefDir, $basePath, $dir);
             static::vendor($chefDir, $basePath);
