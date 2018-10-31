@@ -14,7 +14,9 @@ add to your root package.json
            "DirkPersky\\Typo3Composer\\Classes\\ChefSymlink::setSymlink"
         ]
     },
-    "chef": "LINK_TO_YOUR_CHEF_INSTALLATION"
+    "extra": {
+        "chef": "LINK_TO_YOUR_CHEF_INSTALLATION"
+    }
 ```
 
 ### setVersion
