@@ -61,7 +61,7 @@ class Composer {
         putenv("COMPOSER={$config['COMPOSER']}composer.json" );
         putenv("OSTYPE={$config['OSTYPE']}"); //force to use php://output instead of php://stdout
 
-        exec(trim(sprintf('cd %1$s && composer %2$s %3$s', $config['COMPOSER'], $command, $this->get('options'))), $out,$return);
+        exec(trim(sprintf('cd %1$s && composer %2$s %3$s --ignore-platform-reqs', $config['COMPOSER'], $command, $this->get('options'))), $out,$return);
         die(json_encode($out));
     }
 }
